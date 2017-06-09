@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>chess</title>
+    <link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <script src="../static/js/jquery-3.1.1.js" th:src="@{/js/jquery-3.1.1.js}"></script>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <ul class="main-nav">
+        <li><a href="stats.html" class="btn btn-in">stats</a></li>
+        <li><a href="sign_up.html" class="btn btn-up">sign up</a></li>
+      </ul>
+    </header>
+    <section class="game-suggestion">
+      <form class="form in_form" id="form" action="/sign_in" th:action="@{/sign_in}" th:object="${user}" method="post">
+        <fieldset>
+          <legend>Sign in</legend>
+          <label for="login">login</label>
+          <input name="login" id="login" type="text" th:field="*{login}"/>
+          <label for="password">password</label>
+          <input name="password" id="password" type="password" th:field="*{password}"/>
+          <!-- <a href="#" type="submit" class="btn btn-in">sign in</a> -->
+          <input class="btn btn-in" type="submit" value="sign in" />
+          <a class="btn-forgot" href="forgot_pass.html">forgot your password?</a>
+          <div class="errorMessage" id="errorMessage"></div>
+        </fieldset>
+      </form>
+    </section>
+  </div>
+    <!-- <footer class="main-footer">
+    </footer> -->
+</body>
+</html>

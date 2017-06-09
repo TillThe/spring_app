@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>chess</title>
+    <link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <script src="../static/js/jquery-3.1.1.js" th:src="@{/js/jquery-3.1.1.js}"></script>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <ul class="main-nav">
+        <li><a href="stats1.html" class="btn btn-in">stats</a></li>
+        <li><a href="exit.html" class="btn btn-up">Log out</a></li>
+      </ul>
+    </header>
+    <main class="game">
+      <section class="control-block game-end">
+        <!-- <button class="btn btn-start-game" id="find-game">Начать поиск</button> -->
+        <button class="btn btn-start-game" id="start-game">Начать игру</button>
+        <p class="waiting-time hidden" id="waiting-time">Подождите. Идет поиск соперника..</p>
+      </section>
+      <section class="user-stats enemy-stats game-start">
+        <div class="user-login">
+          <p>Против вас играет</p>
+          <p th:text="${enemy.login}">TillThe</p>
+        </div>
+        <div class="user-stat user-stat-3">
+          <p>Login</p>
+          <p th:text="${enemy.login}"></p>
+        </div>
+        <div class="user-stat user-stat-3">
+          <p>Points</p>
+          <p th:text="${enemy.points}"></p>
+        </div>
+        <div class="user-stat user-stat-1">
+          <p>Wins</p>
+          <p th:text="${enemy.wins}"></p>
+        </div>
+        <div class="user-stat user-stat-2">
+          <p>Draws</p>
+          <p th:text="${enemy.draws}"></p>
+        </div>
+        <div class="user-stat user-stat-3">
+          <p>Defeats</p>
+          <p th:text="${enemy.defeats}">424</p>
+        </div>
+        <div class="user-stat user-stat-3">
+          <p>Win Rate</p>
+          <p th:text="${enemy.winRate}">fs</p>
+        </div>
+      </section>
+      <section class="game-square">
+        <section class="user-stats">
+          <div class="user-stat user-stat-3">
+            <p>Login</p>
+            <p th:text="${user.login}"></p>
+          </div>
+          <div class="user-stat user-stat-3">
+            <p>Points</p>
+            <p th:text="${user.points}"></p>
+          </div>
+          <div class="user-stat user-stat-1">
+            <p>Wins</p>
+            <p th:text="${user.wins}"></p>
+          </div>
+          <div class="user-stat user-stat-2">
+            <p>Draws</p>
+            <p th:text="${user.draws}"></p>
+          </div>
+          <div class="user-stat user-stat-3">
+            <p>Defeats</p>
+            <p th:text="${user.defeats}">424</p>
+          </div>
+          <div class="user-stat user-stat-3">
+            <p>Win Rate</p>
+            <p th:text="${user.winRate}">fs</p>
+          </div>
+        </section>
+        <div class="game-index-letters game-index-letters-1">
+          <div class="game-index-1">a</div>
+          <div class="game-index-2">b</div>
+          <div class="game-index-3">c</div>
+          <div class="game-index-4">d</div>
+          <div class="game-index-5">e</div>
+          <div class="game-index-6">f</div>
+          <div class="game-index-7">g</div>
+          <div class="game-index-8">h</div>
+        </div>
+        <div class="game-index-digits game-index-digits-1">
+          <div class="game-index-1">8</div>
+          <div class="game-index-2">7</div>
+          <div class="game-index-3">6</div>
+          <div class="game-index-4">5</div>
+          <div class="game-index-5">4</div>
+          <div class="game-index-6">3</div>
+          <div class="game-index-7">2</div>
+          <div class="game-index-8">1</div>
+        </div>
+        <table class="game-main-field" border="1" id="game-main-field">
+          <tr class="game-row-1">
+            <td class="game-field-1" id="a8"></td>
+            <td class="game-field-2" id="b8"></td>
+            <td class="game-field-3" id="c8"></td>
+            <td class="game-field-4" id="d8"></td>
+            <td class="game-field-5" id="e8"></td>
+            <td class="game-field-6" id="f8"></td>
+            <td class="game-field-7" id="g8"></td>
+            <td class="game-field-8" id="h8"></td>
+          </tr>
+          <tr class="game-row-2">
+            <td class="game-field-1" id="a7"></td>
+            <td class="game-field-2" id="b7"></td>
+            <td class="game-field-3" id="c7"></td>
+            <td class="game-field-4" id="d7"></td>
+            <td class="game-field-5" id="e7"></td>
+            <td class="game-field-6" id="f7"></td>
+            <td class="game-field-7" id="g7"></td>
+            <td class="game-field-8" id="h7"></td>
+          </tr>
+          <tr class="game-row-3">
+            <td class="game-field-1" id="a6"></td>
+            <td class="game-field-2" id="b6"></td>
+            <td class="game-field-3" id="c6"></td>
+            <td class="game-field-4" id="d6"></td>
+            <td class="game-field-5" id="e6"></td>
+            <td class="game-field-6" id="f6"></td>
+            <td class="game-field-7" id="g6"></td>
+            <td class="game-field-8" id="h6"></td>
+          </tr>
+          <tr class="game-row-4">
+            <td class="game-field-1" id="a5"></td>
+            <td class="game-field-2" id="b5"></td>
+            <td class="game-field-3" id="c5"></td>
+            <td class="game-field-4" id="d5"></td>
+            <td class="game-field-5" id="e5"></td>
+            <td class="game-field-6" id="f5"></td>
+            <td class="game-field-7" id="g5"></td>
+            <td class="game-field-8" id="h5"></td>
+          </tr>
+          <tr class="game-row-5">
+            <td class="game-field-1" id="a4"></td>
+            <td class="game-field-2" id="b4"></td>
+            <td class="game-field-3" id="c4"></td>
+            <td class="game-field-4" id="d4"></td>
+            <td class="game-field-5" id="e4"></td>
+            <td class="game-field-6" id="f4"></td>
+            <td class="game-field-7" id="g4"></td>
+            <td class="game-field-8" id="h4"></td>
+          </tr>
+          <tr class="game-row-6">
+            <td class="game-field-1" id="a3"></td>
+            <td class="game-field-2" id="b3"></td>
+            <td class="game-field-3" id="c3"></td>
+            <td class="game-field-4" id="d3"></td>
+            <td class="game-field-5" id="e3"></td>
+            <td class="game-field-6" id="f3"></td>
+            <td class="game-field-7" id="g3"></td>
+            <td class="game-field-8" id="h3"></td>
+          </tr>
+          <tr class="game-row-7">
+            <td class="game-field-1" id="a2"></td>
+            <td class="game-field-2" id="b2"></td>
+            <td class="game-field-3" id="c2"></td>
+            <td class="game-field-4" id="d2"></td>
+            <td class="game-field-5" id="e2"></td>
+            <td class="game-field-6" id="f2"></td>
+            <td class="game-field-7" id="g2"></td>
+            <td class="game-field-8" id="h2"></td>
+          </tr>
+          <tr class="game-row-8">
+            <td class="game-field-1" id="a1"></td>
+            <td class="game-field-2" id="b1"></td>
+            <td class="game-field-3" id="c1"></td>
+            <td class="game-field-4" id="d1"></td>
+            <td class="game-field-5" id="e1"></td>
+            <td class="game-field-6" id="f1"></td>
+            <td class="game-field-7" id="g1"></td>
+            <td class="game-field-8" id="h1"></td>
+          </tr>
+        </table>
+        <div class="game-index-digits game-index-digits-2">
+          <div class="game-index-1">8</div>
+          <div class="game-index-2">7</div>
+          <div class="game-index-3">6</div>
+          <div class="game-index-4">5</div>
+          <div class="game-index-5">4</div>
+          <div class="game-index-6">3</div>
+          <div class="game-index-7">2</div>
+          <div class="game-index-8">1</div>
+        </div>
+        <div class="game-index-letters game-index-letters-2">
+          <div class="game-index-1">a</div>
+          <div class="game-index-2">b</div>
+          <div class="game-index-3">c</div>
+          <div class="game-index-4">d</div>
+          <div class="game-index-5">e</div>
+          <div class="game-index-6">f</div>
+          <div class="game-index-7">g</div>
+          <div class="game-index-8">h</div>
+        </div>
+        <section class="lost-figures">
+          <table class="player-lost">
+            <tr class="row-1">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+            <tr class="row-2">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+            <tr class="row-3">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+            <tr class="row-4">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+          </table>
+          <table class="enemy-lost">
+            <tr class="row-1">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+            <tr class="row-2">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+            <tr class="row-3">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+            <tr class="row-4">
+              <td class="cell-1"></td>
+              <td class="cell-2"></td>
+              <td class="cell-3"></td>
+              <td class="cell-4"></td>
+            </tr>
+          </table>
+        </section>
+      </section>
+      <section class="game-btn game-start">
+        <a class="btn" href="end-game" id="draw-game">Предложить ничью</a>
+        <a class="btn" href="end-game" id="lose-game">Сдаться</a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

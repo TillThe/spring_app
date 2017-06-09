@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>chess</title>
+    <link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <script src="../static/js/jquery-3.1.1.js" th:src="@{/js/jquery-3.1.1.js}"></script>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <ul class="main-nav">
+        <li><a href="game.html" class="btn btn-up">game</a></li>
+        <li><a href="exit.html" class="btn btn-up">Log out</a></li>
+      </ul>
+    </header>
+    <section class="game-suggestion game-stats">
+      <table class="stats">
+        <tr>
+          <th>Player</th>
+          <th>Points</th>
+          <th>Wins</th>
+          <th>Draws</th>
+          <th>Defeats</th>
+          <th>Win Rate</th>
+        </tr>
+        <tr th:each="user : ${data}">
+          <td th:text="${{user.login}}"></td>
+          <td th:text="${{user.points}}"></td>
+          <td th:text="${{user.wins}}"></td>
+          <td th:text="${{user.draws}}"></td>
+          <td th:text="${{user.defeats}}"></td>
+          <td th:text="${{user.winRate}}"></td>
+        </tr>
+      </table>
+    </section>
+  </div>
+    <!-- <footer class="main-footer">
+    </footer> -->
+</body>
+</html>
